@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "fastsaf",
-    "slug": "fastsaf",
+    "name": "FastInsure Technologies",
+    "slug": "fastinsure-technologies",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -25,6 +25,39 @@
     },
     "plugins": [
       "expo-router",
+      [
+        "expo-font",
+        {
+          "android": {
+            "fonts": [
+              {
+                "fontFamily": "OKXS",
+                "fontDefinitions": [
+                  {
+                    "path": "./assets/fonts/okxs-regular.ttf",
+                    "weight": 400
+                  }
+                ]
+              },
+              {
+                "fontFamily": "OKXS-Medium",
+                "fontDefinitions": [
+                  {
+                    "path": "./assets/fonts/okxs-medium.ttf",
+                    "weight": 500
+                  }
+                ]
+              }
+            ]
+          },
+          "ios": {
+            "fonts": [
+              "./assets/fonts/okxs-regular.ttf",
+              "./assets/fonts/okxs-medium.ttf"
+            ]
+          }
+        }
+      ],
       [
         "expo-splash-screen",
         {

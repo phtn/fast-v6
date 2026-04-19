@@ -1,9 +1,150 @@
-:root {
+@import 'tailwindcss';
+@import 'uniwind';
+@import 'heroui-native/styles';
+
+@source '../node_modules/heroui-native/lib';
+
+@theme inline {
   --font-display:
-    Spline Sans, Inter, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji,
+    OKXS, Inter, 'SF Pro Display', ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji,
     Segoe UI Symbol, Noto Color Emoji;
   --font-mono:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
-  --font-rounded: 'SF Pro Rounded', 'Hiragino Maru Gothic ProN', Meiryo, 'MS PGothic', sans-serif;
+    'SF Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+    monospace;
+  --font-rounded: 'SF Pro Rounded', Inter, ui-sans-serif, system-ui, sans-serif;
   --font-serif: Georgia, 'Times New Roman', serif;
+  --color-secondary: var(--secondary);
+  --color-secondary-border: var(--secondary-border);
+
+  --color-active: var(--active);
+  --color-active-foreground: var(--active-foreground);
+}
+
+@layer theme {
+  :root {
+    --radius: 0.5rem;
+    --field-radius: 0.75rem;
+    --field-border-width: 1px;
+
+    @variant light {
+      --background: oklch(0.976 0.005 84);
+      --foreground: oklch(0.243 0.012 286);
+
+      --surface: oklch(0.998 0.002 90);
+      --surface-foreground: var(--foreground);
+      --surface-secondary: oklch(0.985 0.003 84);
+      --surface-secondary-foreground: var(--foreground);
+      --surface-tertiary: oklch(0.972 0.004 84);
+      --surface-tertiary-foreground: var(--foreground);
+
+      --overlay: var(--surface);
+      --overlay-foreground: var(--foreground);
+      --backdrop: oklch(0% 0 0 / 24%);
+
+      --muted: oklch(0.58 0.011 286);
+
+      --default: oklch(0.942 0.004 84);
+      --default-foreground: var(--foreground);
+
+      /*--accent: oklch(0.67 0.175 296);*/
+      --accent: var(--active);
+      --accent-foreground: var(--surface);
+
+      --field-background: var(--surface);
+      --field-foreground: var(--foreground);
+      --field-placeholder: var(--muted);
+      --field-border: oklch(0.908 0.006 84);
+
+      --success: oklch(0.73 0.15 160);
+      --success-foreground: var(--foreground);
+      --warning: oklch(0.79 0.13 78);
+      --warning-foreground: var(--foreground);
+      --danger: oklch(0.65 0.19 24);
+      --danger-foreground: var(--surface);
+
+      --segment: var(--surface);
+      --segment-foreground: var(--foreground);
+
+      --border: oklch(0.908 0.006 84);
+      --separator: oklch(0.84 0.008 84);
+      --focus: var(--accent);
+      --link: var(--accent);
+
+      --surface-shadow: 0 10px 30px 0 rgba(15, 18, 33, 0.05), 0 2px 8px 0 rgba(15, 18, 33, 0.03);
+      --overlay-shadow: 0 20px 48px 0 rgba(15, 18, 33, 0.08), 0 4px 12px 0 rgba(15, 18, 33, 0.04);
+      --field-shadow: 0 0 0 0 transparent inset;
+
+      --color-default-hover: #ece7e1;
+      --color-accent-hover: #7c63f8;
+      --color-danger-hover: #d85c56;
+      --color-danger-soft-hover: rgba(216, 92, 86, 0.18);
+
+      --active: oklch(0.6321 0.2018 254.09);
+      --active-foreground: oklch(0.955 0.004 84);
+
+      --secondary: oklch(0.998 0.002 90);
+      --secondary-border: oklch(0.908 0.006 84);
+    }
+
+    @variant dark {
+      /*--background: oklch(0.111 0.015 328.36);*/
+      --background: oklch(0.15 0.0015 305);
+      --foreground: oklch(0.955 0.004 84);
+
+      --surface: oklch(0.215 0.012 286);
+      --surface-foreground: var(--foreground);
+      --surface-secondary: oklch(0.255 0.012 286);
+      --surface-secondary-foreground: var(--foreground);
+      --surface-tertiary: oklch(0.288 0.012 286);
+      --surface-tertiary-foreground: var(--foreground);
+
+      --overlay: oklch(0.235 0.012 286);
+      --overlay-foreground: var(--foreground);
+      --backdrop: oklch(0% 0 0 / 32%);
+
+      --muted: oklch(0.72 0.013 286);
+
+      --default: oklch(0.28 0.013 286);
+      --default-foreground: var(--foreground);
+
+      /*--accent: oklch(0.73 0.145 296);*/
+      --accent: var(--active);
+      --accent-foreground: oklch(0.16 0.014 286);
+
+      --field-background: oklch(0.235 0.012 286);
+      --field-foreground: var(--foreground);
+      --field-placeholder: var(--muted);
+      --field-border: oklch(0.34 0.012 286);
+
+      --success: oklch(0.77 0.14 160);
+      --success-foreground: oklch(0.16 0.014 286);
+      --warning: oklch(0.83 0.11 78);
+      --warning-foreground: oklch(0.16 0.014 286);
+      --danger: oklch(0.7 0.17 24);
+      --danger-foreground: var(--surface);
+
+      --segment: oklch(0.255 0.012 286);
+      --segment-foreground: var(--foreground);
+
+      --border: oklch(0.34 0.012 286);
+      --separator: oklch(0.42 0.013 286);
+      --focus: var(--accent);
+      --link: var(--accent);
+
+      --surface-shadow: 0 0 0 0 transparent inset;
+      --overlay-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.16) inset;
+      --field-shadow: 0 0 0 0 transparent inset;
+
+      --color-default-hover: #2c2e38;
+      --color-accent-hover: #b29fff;
+      --color-danger-hover: #f07a73;
+      --color-danger-soft-hover: rgba(240, 122, 115, 0.22);
+
+      --active: oklch(0.6515 0.191972 251.4696);
+      --active-foreground: oklch(0.955 0.004 84);
+
+      --secondary: oklch(0.4549 0.0096 253.93);
+      --secondary-border: oklch(0.4549 0.0096 253.93);
+    }
+  }
 }
