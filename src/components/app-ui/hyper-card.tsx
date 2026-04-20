@@ -14,7 +14,7 @@ type HyperCardProps = {
   badge?: string
   className?: string
   ctaLabel?: string
-  handle: string
+  handle?: string
   initials?: string
   metricLabel: string
   metricValue: string
@@ -41,11 +41,16 @@ export function HyperCard({
 }: HyperCardProps) {
   return (
     <AppCard className={className}>
-      <AppCardContent className='p-6'>
+      <AppCardContent className='p-4'>
         <View className='gap-5'>
           <View className='flex-1 gap-1'>
-            <ThemedText type='eyebrow'>BUTT FUCK</ThemedText>
-            <ThemedText className='text-[18px] text-balance leading-6 font-normal w-full'>{title}</ThemedText>
+            <View className='flex-row items-center justify-between'>
+              <ThemedText type='eyebrow'>BUTT FUCK</ThemedText>
+              <ThemedText type='linkPrimary'>&rarr;</ThemedText>
+            </View>
+            <View className='h-18 justify-center'>
+              <ThemedText className='text-[20px] text-balance leading-6 font-normal w-full'>{title}</ThemedText>
+            </View>
             {badge ? <AppBadge tone='neutral'>{badge}</AppBadge> : null}
           </View>
 

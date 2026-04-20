@@ -6,14 +6,17 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 import { AnimatedSplashOverlay } from '@/components/animated-icon'
 import AppTabs from '@/components/app-tabs'
+import { AuthProvider } from '@/context/auth-context'
 import { AppThemeProvider, useAppTheme } from '@/context/app-theme-context'
 
 export default function TabLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <AppThemeProvider>
-        <RootLayoutContent />
-      </AppThemeProvider>
+      <AuthProvider>
+        <AppThemeProvider>
+          <RootLayoutContent />
+        </AppThemeProvider>
+      </AuthProvider>
     </GestureHandlerRootView>
   )
 }

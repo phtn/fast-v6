@@ -58,7 +58,7 @@ export function AppCardHeader({
           ) : null}
 
           {title ? (
-            <ThemedText className={cn('text-[22px] leading-7 font-medium', titleClassName)}>{title}</ThemedText>
+            <ThemedText className={cn('text-[16px] leading-7 font-medium', titleClassName)}>{title}</ThemedText>
           ) : null}
 
           {description ? (

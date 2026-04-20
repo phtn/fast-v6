@@ -7,11 +7,11 @@ import {
   AppCardContent,
   AppCardHeader,
   AppScreen,
-  CommunityCard,
   PricingPlanCard,
   SectionHeading,
   SocialPlatformPill
 } from '@/components/app-ui'
+import { HyperCard } from '@/components/app-ui/hyper-card'
 import { ThemedText } from '@/components/themed-text'
 import { cn } from '@/lib/cn'
 
@@ -34,9 +34,9 @@ export default function ComponentsScreen() {
       <View className='gap-5'>
         <ThemedText className='text-[20px] leading-[26px] font-normal'>Telegram community</ThemedText>
 
-        <CommunityCard
+        <HyperCard
           accentLine='Advance Your Expertise'
-          handle='@compchem_more'
+          badge='@compchem_more'
           metricLabel='Exp'
           metricValue='+100'
           network='telegram'
@@ -94,8 +94,8 @@ export default function ComponentsScreen() {
             </View>
 
             <ThemedText themeColor='textSecondary'>
-              Start new work from `AppScreen`, `AppCard`, `AppButton`, `AppBadge`, and the social
-              components before reaching for one-off layout decisions.
+              Start new work from `AppScreen`, `AppCard`, `AppButton`, `AppBadge`, and the social components before
+              reaching for one-off layout decisions.
             </ThemedText>
           </AppCardContent>
         </AppCard>
