@@ -1,8 +1,8 @@
-import type { PropsWithChildren } from 'react'
+import type { PropsWithChildren, ReactNode } from 'react'
 import { Platform, ScrollView, View, type ScrollViewProps } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme'
+import { MaxContentWidth, Spacing } from '@/constants/theme'
 import { cn } from '@/lib/cn'
 
 type AppScreenProps = PropsWithChildren<
@@ -10,6 +10,9 @@ type AppScreenProps = PropsWithChildren<
     className?: string
     innerClassName?: string
     maxWidth?: number
+    stickyHeader?: ReactNode
+    stickyHeaderClassName?: string
+    stickyHeaderGap?: number
   }
 >
 
@@ -21,7 +24,11 @@ export function AppScreen({
   keyboardShouldPersistTaps = 'handled',
   maxWidth = MaxContentWidth,
   showsVerticalScrollIndicator = false,
+  stickyHeader,
+  stickyHeaderClassName,
+  stickyHeaderGap = Spacing.two,
   style,
+  stickyHeaderIndices,
   ...props
 }: AppScreenProps) {
   const insets = useSafeAreaInsets()
@@ -29,33 +36,48 @@ export function AppScreen({
   const topPadding =
     Platform.select({
       web: Spacing.six,
-      default: insets.top + Spacing.three
+      default: stickyHeader ? 0 : insets.top + Spacing.three
     }) ?? Spacing.six
 
   const bottomPadding =
     Platform.select({
       web: Spacing.five,
-      default: insets.bottom + BottomTabInset + Spacing.three
+      default: insets.bottom
     }) ?? Spacing.five
+
+  const horizontalPadding = {
+    paddingLeft: Spacing.two + insets.left,
+    paddingRight: Spacing.two + insets.right
+  }
 
   return (
     <ScrollView
       className={cn('flex-1 bg-background', className)}
       contentContainerStyle={[
         {
-          alignItems: 'center',
-          paddingTop: topPadding,
-          paddingBottom: bottomPadding,
-          paddingLeft: Spacing.two + insets.left,
-          paddingRight: Spacing.two + insets.right
+          paddingTop: stickyHeader ? 0 : topPadding,
+          paddingBottom: bottomPadding
         },
         contentContainerStyle
       ]}
       keyboardShouldPersistTaps={keyboardShouldPersistTaps}
       showsVerticalScrollIndicator={showsVerticalScrollIndicator}
+      stickyHeaderIndices={stickyHeader ? [0] : stickyHeaderIndices}
       style={style}
       {...props}>
-      <View className={cn('w-full gap-6', innerClassName)} style={maxWidth ? { maxWidth } : undefined}>
+      {stickyHeader ? (
+        <View
+          className={cn('w-full bg-background', stickyHeaderClassName)}
+          style={{ paddingTop: topPadding, paddingBottom: stickyHeaderGap, ...horizontalPadding }}>
+          <View className='w-full self-center' style={maxWidth ? { maxWidth } : undefined}>
+            {stickyHeader}
+          </View>
+        </View>
+      ) : null}
+
+      <View
+        className={cn('w-full self-center gap-6', innerClassName)}
+        style={[horizontalPadding, maxWidth ? { maxWidth } : undefined]}>
         {children}
       </View>
     </ScrollView>

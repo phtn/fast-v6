@@ -62,7 +62,7 @@ export function AppCardHeader({
           ) : null}
 
           {description ? (
-            <ThemedText themeColor='textSecondary' className={cn('leading-[22px]', descriptionClassName)}>
+            <ThemedText themeColor='textSecondary' className={cn('leading-5.5', descriptionClassName)}>
               {description}
             </ThemedText>
           ) : null}

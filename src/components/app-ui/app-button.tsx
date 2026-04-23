@@ -36,10 +36,10 @@ export function AppButton({
   return (
     <PressableFeedback
       accessibilityRole={accessibilityRole}
-      animation={{ scale: { value: 0.99 } }}
+      animation={{ scale: { value: 0.98 } }}
       className={cn(
-        'self-start flex-row items-center justify-center gap-2 border',
-        size === 'sm' && 'min-h-9 px-6 rounded-[6xp]',
+        'self-start flex-row items-center justify-center gap-2.5 border',
+        size === 'sm' && 'min-h-9 px-5 rounded-[6xp]',
         size === 'md' && 'min-h-11 px-8 rounded-lg',
         size === 'lg' && 'min-h-14 px-12 rounded-[11px]',
         tone === 'primary' && 'border-foreground bg-foreground',
@@ -53,7 +53,7 @@ export function AppButton({
       )}
       isDisabled={isDisabled}
       {...props}>
-      {leadingIcon ? <View className='items-center justify-center'>{leadingIcon}</View> : null}
+      {leadingIcon ? <View className='items-center justify-center -ml-1.5'>{leadingIcon}</View> : null}
 
       {typeof children === 'string' || typeof children === 'number' ? (
         <ThemedText
@@ -72,7 +72,7 @@ export function AppButton({
         children
       )}
 
-      {trailingIcon ? <View className='items-center justify-center'>{trailingIcon}</View> : null}
+      {trailingIcon ? <View className='items-center justify-center -mr-1.5'>{trailingIcon}</View> : null}
     </PressableFeedback>
   )
 }

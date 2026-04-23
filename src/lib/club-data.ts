@@ -16,6 +16,7 @@ export type ClubAction = {
 }
 
 export type AmenityCategory = 'all' | 'wellness' | 'dining' | 'work' | 'leisure'
+export type StartCategory = 'all' | 'bubly' | 'romantic' | 'active' | 'fun' | 'happy' | 'sensational'
 
 export type Amenity = {
   category: Exclude<AmenityCategory, 'all'>
@@ -25,6 +26,17 @@ export type Amenity = {
   name: string
   status: string
   tone: ClubAccent
+}
+export interface Star {
+  category: Exclude<StartCategory, 'all'>
+  description: string
+  level: string
+  rate: string
+  name: string
+  status: string
+  likes: number
+  tone: ClubAccent
+  pref?: string[]
 }
 
 export type ClubEvent = {
@@ -91,7 +103,7 @@ export const amenities: Amenity[] = [
   {
     category: 'dining',
     description: 'Seasonal dining room with a private counter and late seating.',
-    floor: 'Level 3',
+    floor: '3',
     hours: '6 PM - 12 AM',
     name: 'House Dining',
     status: '12 seats open',
@@ -100,7 +112,7 @@ export const amenities: Amenity[] = [
   {
     category: 'wellness',
     description: 'Thermal circuit, treatment rooms, and recovery lounge.',
-    floor: 'Lower level',
+    floor: '1',
     hours: '7 AM - 10 PM',
     name: 'Bathhouse',
     status: 'Quiet',
@@ -109,7 +121,7 @@ export const amenities: Amenity[] = [
   {
     category: 'work',
     description: 'Sound-treated rooms, call booths, and staffed reception.',
-    floor: 'Level 2',
+    floor: '2',
     hours: '8 AM - 8 PM',
     name: 'Work Suites',
     status: '3 rooms open',
@@ -118,13 +130,68 @@ export const amenities: Amenity[] = [
   {
     category: 'leisure',
     description: 'Screening room, records, games, and a reserved bar.',
-    floor: 'Level 4',
+    floor: '4',
     hours: '4 PM - 1 AM',
     name: 'Members Lounge',
     status: 'Members only',
     tone: 'rose'
   }
 ]
+
+export const stars: Star[] = [
+  {
+    category: 'bubly',
+    description: 'Seasonal dining room with a private counter and late seating.',
+    level: '3',
+    rate: '6 PM - 12 AM',
+    name: 'House Dining',
+    status: '12 seats open',
+    likes: 0,
+    tone: 'amber'
+  },
+  {
+    category: 'sensational',
+    description: 'Thermal circuit, treatment rooms, and recovery lounge.',
+    level: '1',
+    rate: '7 AM - 10 PM',
+    name: 'Bathhouse',
+    status: 'Quiet',
+    likes: 0,
+    tone: 'amber'
+  },
+  {
+    category: 'active',
+    description: 'Sound-treated rooms, call booths, and staffed reception.',
+    level: '2',
+    rate: '8 AM - 8 PM',
+    name: 'Work Suites',
+    status: '3 rooms open',
+    likes: 0,
+    tone: 'amber'
+  },
+  {
+    category: 'fun',
+    description: 'Screening room, records, games, and a reserved bar.',
+    level: '4',
+    rate: '4 PM - 1 AM',
+    name: 'Members Lounge',
+    status: 'Members only',
+    likes: 0,
+    tone: 'amber'
+  }
+]
+
+export function getAmenitySlug(name: string) {
+  return name
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
+export function getAmenityBySlug(slug: string) {
+  return amenities.find((amenity) => getAmenitySlug(amenity.name) === slug)
+}
 
 export const amenityCategories: { label: string; value: AmenityCategory }[] = [
   { label: 'All', value: 'all' },

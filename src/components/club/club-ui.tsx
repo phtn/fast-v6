@@ -310,13 +310,13 @@ export function ActionCard({
       accessibilityRole='button'
       className='flex-1 min-w-54 active:opacity-80'
       onPress={() => router.push(href)}>
-      <AppCard className={cn('bg-secondary', getClubAccentClass(accent, 'border'))}>
+      <AppCard className={cn('bg-secondary', getClubAccentClass(accent, 'border'), 'border-secondary')}>
         <AppCardContent className='gap-4 pt-5'>
           <View
             className={cn(
-              'h-11 w-11 items-center justify-center rounded-lg border',
-              getClubAccentClass(accent, 'bg'),
-              getClubAccentClass(accent, 'border')
+              'h-11 w-11 items-center justify-center rounded-lg'
+              // getClubAccentClass(accent, 'bg')
+              // getClubAccentClass(accent, 'border')
             )}>
             <ClubIcon color={getClubAccentColor(accent)} name={icon} />
           </View>
@@ -351,7 +351,7 @@ export function AmenityCard({
   tone: ClubAccent
 }) {
   return (
-    <AppCard className={cn('flex-1 min-w-64 bg-secondary', getClubAccentClass(tone, 'border'))}>
+    <AppCard className={cn('flex-1 min-w-64 bg-secondary', getClubAccentClass(tone, 'border'), 'border-secondary')}>
       <AppCardHeader eyebrow={floor} title={name} trailing={<AppBadge tone='neutral'>{status}</AppBadge>} />
       <AppCardContent className='gap-4'>
         <ThemedText themeColor='textSecondary' className='leading-5'>
