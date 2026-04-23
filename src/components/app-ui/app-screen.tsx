@@ -26,15 +26,17 @@ export function AppScreen({
 }: AppScreenProps) {
   const insets = useSafeAreaInsets()
 
-  const topPadding = Platform.select({
-    web: Spacing.six,
-    default: insets.top + Spacing.three
-  }) ?? Spacing.six
+  const topPadding =
+    Platform.select({
+      web: Spacing.six,
+      default: insets.top + Spacing.three
+    }) ?? Spacing.six
 
-  const bottomPadding = Platform.select({
-    web: Spacing.five,
-    default: insets.bottom + BottomTabInset + Spacing.three
-  }) ?? Spacing.five
+  const bottomPadding =
+    Platform.select({
+      web: Spacing.five,
+      default: insets.bottom + BottomTabInset + Spacing.three
+    }) ?? Spacing.five
 
   return (
     <ScrollView
@@ -44,8 +46,8 @@ export function AppScreen({
           alignItems: 'center',
           paddingTop: topPadding,
           paddingBottom: bottomPadding,
-          paddingLeft: Spacing.four + insets.left,
-          paddingRight: Spacing.four + insets.right
+          paddingLeft: Spacing.two + insets.left,
+          paddingRight: Spacing.two + insets.right
         },
         contentContainerStyle
       ]}

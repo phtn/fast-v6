@@ -3,8 +3,8 @@ import { TabList, Tabs, TabSlot, TabTrigger, type TabListProps, type TabTriggerS
 import { useEffect } from 'react'
 import { Pressable, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import Svg, { Circle, Path, Rect } from 'react-native-svg'
 
+import { ClubIcon } from '@/components/club/club-ui'
 import { ThemedText } from '@/components/themed-text'
 import { useAuthSession } from '@/context/auth-context'
 import { cn } from '@/lib/cn'
@@ -17,9 +17,9 @@ const INACTIVE_ICON_COLOR = '#74747B'
 
 const TABS_CONFIG = [
   { href: '/', icon: 'home', label: 'Home', name: 'home' },
-  { href: '/components', icon: 'library', label: 'Library', name: 'library' },
-  { href: '/forms', icon: 'forms', label: 'Forms', name: 'forms' },
-  { href: '/explore', icon: 'explore', label: 'Explore', name: 'explore' }
+  { href: '/check-in', icon: 'check', label: 'Check in', name: 'check-in' },
+  { href: '/amenities', icon: 'amenity', label: 'Amenities', name: 'amenities' },
+  { href: '/concierge', icon: 'concierge', label: 'Concierge', name: 'concierge' }
 ] as const
 
 type TabIconName = (typeof TABS_CONFIG)[number]['icon']
@@ -104,11 +104,11 @@ function TabButton({
   return (
     <Pressable {...props} className='flex items-center justify-center active:scale-96 transition-transform'>
       <View className='min-h-11 items-center justify-end'>
-        <View className={cn('flex items-center justify-center rounded-full h-8 w-8')}>
+        <View className={cn('flex items-center justify-center rounded-full h-7 w-7')}>
           <TabIcon color={iconColor} focused={Boolean(isFocused)} name={icon} />
         </View>
 
-        <ThemedText className={cn('text-[10px] leading-2', isFocused ? 'text-[#F5F2EB]' : 'text-[#8A8A91]')}>
+        <ThemedText className={cn('text-[9px] leading-none', isFocused ? 'text-[#F5F2EB]' : 'text-[#8A8A91]')}>
           {label}
         </ThemedText>
       </View>
@@ -118,48 +118,7 @@ function TabButton({
 
 function TabIcon({ color, focused, name }: { color: string; focused: boolean; name: TabIconName }) {
   const size = focused ? 26 : 26
-  const strokeWidth = focused ? 2 : 1
+  const strokeWidth = focused ? 1 : 1
 
-  switch (name) {
-    case 'home':
-      return (
-        <Svg fill='none' height={size} viewBox='0 0 24 24' width={size}>
-          <Path
-            d='M4.75 10.5 12 4.75l7.25 5.75V19a1 1 0 0 1-1 1h-4.5v-5.25h-3.5V20h-4.5a1 1 0 0 1-1-1v-8.5Z'
-            stroke={color}
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth={strokeWidth}
-          />
-        </Svg>
-      )
-    case 'library':
-      return (
-        <Svg fill='none' height={size} viewBox='0 0 24 24' width={size}>
-          <Rect height='6.5' rx='1.4' stroke={color} strokeWidth={strokeWidth} width='6.5' x='4.25' y='4.25' />
-          <Rect height='6.5' rx='1.4' stroke={color} strokeWidth={strokeWidth} width='6.5' x='13.25' y='4.25' />
-          <Rect height='6.5' rx='1.4' stroke={color} strokeWidth={strokeWidth} width='6.5' x='4.25' y='13.25' />
-          <Rect height='6.5' rx='1.4' stroke={color} strokeWidth={strokeWidth} width='6.5' x='13.25' y='13.25' />
-        </Svg>
-      )
-    case 'forms':
-      return (
-        <Svg fill='none' height={size} viewBox='0 0 24 24' width={size}>
-          <Path
-            d='M6 7.25h12m0 0-4-4m4 4-4 4M18 16.75H6m0 0 4-4m-4 4 4 4'
-            stroke={color}
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth={strokeWidth}
-          />
-        </Svg>
-      )
-    case 'explore':
-      return (
-        <Svg fill='none' height={size} viewBox='0 0 24 24' width={size}>
-          <Circle cx='12' cy='12' r='7.25' stroke={color} strokeWidth={strokeWidth} />
-          <Circle cx='12' cy='12' fill={color} r='1.1' />
-        </Svg>
-      )
-  }
+  return <ClubIcon color={color} focused={focused} name={name} size={size} strokeWidth={strokeWidth} />
 }

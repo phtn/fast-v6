@@ -45,7 +45,7 @@ export function HyperCard({
         <View className='gap-5'>
           <View className='flex-1 gap-1'>
             <View className='flex-row items-center justify-between'>
-              <ThemedText type='eyebrow'>BUTT FUCK</ThemedText>
+              <ThemedText type='eyebrow'>{accentLine}</ThemedText>
               <ThemedText type='linkPrimary'>&rarr;</ThemedText>
             </View>
             <View className='h-18 justify-center'>
@@ -66,19 +66,5 @@ export function HyperCard({
         </View>
       </AppCardContent>
     </AppCard>
-  )
-}
-
-function CommunityAvatar({ initials }: { initials?: string }) {
-  if (initials) {
-    return (
-      <View className='size-10 items-center justify-center rounded-full border border-border bg-default'>
-        <ThemedText className='text-[13px] leading-4 font-semibold text-accent'>{initials}</ThemedText>
-      </View>
-    )
-  }
-
-  return (
-    <View className='relative size-9 aspect-square items-center justify-center rounded-full border border-border bg-surface'></View>
   )
 }

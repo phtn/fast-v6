@@ -42,7 +42,7 @@ export function SectionHeading({
       {description ? (
         <ThemedText
           themeColor='textSecondary'
-          className={cn('max-w-[640px]', centered && 'text-center', descriptionClassName)}>
+          className={cn('max-w-160', centered && 'text-center', descriptionClassName)}>
           {description}
         </ThemedText>
       ) : null}

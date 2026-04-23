@@ -40,7 +40,7 @@ export function AppButton({
       className={cn(
         'self-start flex-row items-center justify-center gap-2 border',
         size === 'sm' && 'min-h-9 px-6 rounded-[6xp]',
-        size === 'md' && 'min-h-11 px-8 rounded-[8px]',
+        size === 'md' && 'min-h-11 px-8 rounded-lg',
         size === 'lg' && 'min-h-14 px-12 rounded-[11px]',
         tone === 'primary' && 'border-foreground bg-foreground',
         tone === 'secondary' && 'border-secondary bg-secondary',

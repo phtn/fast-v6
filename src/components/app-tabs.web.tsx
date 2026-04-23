@@ -1,47 +1,74 @@
-import {
-  Tabs,
-  TabList,
-  TabTrigger,
-  TabSlot,
-  TabTriggerSlotProps,
-  TabListProps,
-} from 'expo-router/ui'
-import React from 'react'
+import { usePathname, useRouter } from 'expo-router'
+import { TabList, Tabs, TabSlot, TabTrigger, type TabListProps, type TabTriggerSlotProps } from 'expo-router/ui'
+import { useEffect } from 'react'
 import { Pressable, View } from 'react-native'
 
-import { ThemedText } from './themed-text'
-
+import { ClubIcon, type ClubIconName } from '@/components/club/club-ui'
+import { ThemedText } from '@/components/themed-text'
+import { useAuthSession } from '@/context/auth-context'
 import { cn } from '@/lib/cn'
 
+const ACTIVE_ICON_COLOR = '#0091ff'
+const INACTIVE_ICON_COLOR = '#74747B'
+
+const TABS_CONFIG = [
+  { href: '/', icon: 'home', label: 'Home', name: 'home' },
+  { href: '/check-in', icon: 'check', label: 'Check in', name: 'check-in' },
+  { href: '/amenities', icon: 'amenity', label: 'Amenities', name: 'amenities' },
+  { href: '/concierge', icon: 'concierge', label: 'Concierge', name: 'concierge' }
+] as const satisfies readonly {
+  href: '/' | '/check-in' | '/amenities' | '/concierge'
+  icon: ClubIconName
+  label: string
+  name: string
+}[]
+
+type WebTabIconName = (typeof TABS_CONFIG)[number]['icon']
+
 export default function AppTabs() {
+  const pathname = usePathname()
+  const router = useRouter()
+  const { ready, user } = useAuthSession()
+
+  useEffect(() => {
+    if (ready && !user && pathname !== '/') {
+      router.replace('/')
+    }
+  }, [pathname, ready, router, user])
+
   return (
-    <Tabs>
-      <TabSlot style={{ height: '100%' }} />
-      <TabList asChild>
-        <CustomTabList>
-          <TabTrigger name='home' href='/' asChild>
-            <TabButton>Home</TabButton>
-          </TabTrigger>
-          <TabTrigger name='components' href='/components' asChild>
-            <TabButton>Components</TabButton>
-          </TabTrigger>
-          <TabTrigger name='forms' href='/forms' asChild>
-            <TabButton>Forms</TabButton>
-          </TabTrigger>
-          <TabTrigger name='explore' href='/explore' asChild>
-            <TabButton>Explore</TabButton>
-          </TabTrigger>
-        </CustomTabList>
-      </TabList>
+    <Tabs asChild>
+      <View className='relative flex-1 bg-background'>
+        <TabSlot style={{ flex: 1 }} />
+        <TabList asChild>
+          <CustomTabList hidden={!user}>
+            {TABS_CONFIG.map((tab) => (
+              <TabTrigger key={tab.name} asChild href={tab.href} name={tab.name}>
+                <TabButton icon={tab.icon}>{tab.label}</TabButton>
+              </TabTrigger>
+            ))}
+          </CustomTabList>
+        </TabList>
+      </View>
     </Tabs>
   )
 }
 
-export function TabButton({ children, isFocused, ...props }: TabTriggerSlotProps) {
+export function TabButton({
+  children,
+  icon,
+  isFocused,
+  ...props
+}: TabTriggerSlotProps & {
+  icon: WebTabIconName
+}) {
+  const iconColor = isFocused ? ACTIVE_ICON_COLOR : INACTIVE_ICON_COLOR
+
   return (
-    <Pressable {...props} style={({ pressed }) => (pressed ? { opacity: 0.72 } : undefined)}>
-      <View className={cn('rounded-lg px-3 py-2', isFocused && 'bg-default')}>
-        <ThemedText type='small' themeColor={isFocused ? 'text' : 'textSecondary'}>
+    <Pressable {...props} className='active:opacity-75'>
+      <View className={cn('flex-row items-center gap-2 rounded-lg px-3 py-2', isFocused && 'bg-default')}>
+        <ClubIcon color={iconColor} focused={Boolean(isFocused)} name={icon} size={17} strokeWidth={1.4} />
+        <ThemedText type='smallBold' themeColor={isFocused ? 'text' : 'textSecondary'}>
           {children}
         </ThemedText>
       </View>
@@ -49,15 +76,25 @@ export function TabButton({ children, isFocused, ...props }: TabTriggerSlotProps
   )
 }
 
-export function CustomTabList(props: TabListProps) {
+export function CustomTabList({
+  children,
+  hidden = false,
+  ...props
+}: TabListProps & {
+  hidden?: boolean
+}) {
   return (
-    <View {...props} className='absolute inset-x-0 top-0 flex-row justify-center px-4 pt-4'>
-      <View className='w-full max-w-[920px] flex-row items-center gap-2 rounded-lg border border-border bg-surface px-4 py-2'>
+    <View
+      {...props}
+      className='absolute inset-x-0 top-0 flex-row justify-center px-4 pt-4'
+      pointerEvents={hidden ? 'none' : 'auto'}
+      style={hidden ? { display: 'none' } : undefined}>
+      <View className='w-full max-w-230 flex-row items-center gap-2 rounded-lg border border-border bg-surface px-4 py-2'>
         <ThemedText type='smallBold' className='mr-auto'>
-          FastSaf
+          Fast Club
         </ThemedText>
 
-        {props.children}
+        {children}
       </View>
     </View>
   )

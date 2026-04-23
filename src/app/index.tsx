@@ -1,15 +1,15 @@
 import * as Google from 'expo-auth-session/providers/google'
 import Constants from 'expo-constants'
 import { Image } from 'expo-image'
-import { useRouter } from 'expo-router'
 import * as WebBrowser from 'expo-web-browser'
 import { GoogleAuthProvider, signInWithCredential } from 'firebase/auth'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Platform, View } from 'react-native'
 import Svg, { Path } from 'react-native-svg'
 
-import { AppButton, AppCard, AppCardContent, AppCardHeader, SectionHeading } from '@/components/app-ui'
+import { AppButton, AppCard, AppCardContent, AppCardHeader } from '@/components/app-ui'
 import { AuthScreen } from '@/components/app-ui/auth-screen'
+import { MemberDashboard } from '@/components/club/member-dashboard'
 import { ThemedText } from '@/components/themed-text'
 import { useAuthSession } from '@/context/auth-context'
 import { auth } from '@/lib/firebase/client'
@@ -37,6 +37,7 @@ const nativeGoogleSignInModule: NativeGoogleSignInModule | null =
     ? null
     : (() => {
         try {
+          // eslint-disable-next-line @typescript-eslint/no-require-imports
           return require('@react-native-google-signin/google-signin') as NativeGoogleSignInModule
         } catch {
           return null
@@ -44,7 +45,6 @@ const nativeGoogleSignInModule: NativeGoogleSignInModule | null =
       })()
 
 export default function HomeScreen() {
-  const router = useRouter()
   const { ready, signOut, user } = useAuthSession()
   const [busy, setBusy] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
@@ -58,14 +58,6 @@ export default function HomeScreen() {
     selectAccount: true,
     webClientId: googleAuthConfig.webClientId
   })
-
-  const signedInLabel = useMemo(() => {
-    if (!user) {
-      return null
-    }
-
-    return user.displayName ?? user.email ?? 'Google account connected'
-  }, [user])
 
   const exchangeGoogleToken = useCallback(async (idToken?: string | null) => {
     if (!idToken) {
@@ -175,84 +167,60 @@ export default function HomeScreen() {
     }
   }, [signOut, usesNativeGoogleSignIn])
 
+  if (user) {
+    return (
+      <MemberDashboard
+        errorMessage={errorMessage}
+        onSignOut={() => void handleSignOut()}
+        signingOut={busy}
+        user={user}
+      />
+    )
+  }
+
   return (
     <AuthScreen innerClassName='gap-6' keyboardShouldPersistTaps='handled' maxWidth={520}>
-      <View className='relative overflow-hidden rounded-lg bg-linear-to-b from-secondary/20 to-background h-full'>
+      <View className='relative h-full overflow-hidden rounded-lg bg-linear-to-b from-secondary/20 to-background'>
         <Image
           className='h-full'
           contentFit='cover'
           source={require('@/assets/images/logo-glow.png')}
           style={{ width: '100%', aspectRatio: 0.69 }}
         />
+
+        <Image
+          source={require('@/assets/images/fastcar-optimized.svg')}
+          style={{ width: '60%', aspectRatio: 7, position: 'absolute', top: '40%', left: '25%' }}
+        />
       </View>
 
-      {user && (
-        <SectionHeading
-          eyebrow='FastInsure'
-          title='Welcome back'
-          description='Your Google account is connected and ready to use.'
-        />
-      )}
-
-      <AppCard className='absolute -bottom-20 bg-transparent border-0 p-6'>
-        <AppCardHeader
-          eyebrow=''
-          title={user ? (signedInLabel ?? 'Signed in') : ''}
-          description={user ? 'You can go straight into the app or disconnect this device from your session.' : ''}
-        />
+      <AppCard className='absolute bottom-0 border-0 bg-transparent p-6 w-full'>
+        <AppCardHeader eyebrow='' title='FastInsure Technologies' description='' />
         <AppCardContent className='gap-4'>
-          {user && (
-            <View className='gap-1 rounded-lg border border-border bg-background px-4 py-4'>
-              <ThemedText type='small' themeColor='textSecondary'>
-                Signed in as
-              </ThemedText>
-              <ThemedText className='font-medium'>{user?.email ?? 'Google account'}</ThemedText>
-            </View>
-          )}
-
-          {user ? (
-            <AppButton fullWidth size='lg' onPress={() => router.replace('/components')}>
-              Open workspace
-            </AppButton>
-          ) : (
-            <AppButton
-              fullWidth
-              tone='primary'
-              className='border-border'
-              isDisabled={!ready || busy || isExpoGoNative || needsNativeRebuild || (Platform.OS === 'web' && !request)}
-              leadingIcon={<GoogleMark />}
-              onPress={() => void handleContinueWithGoogle()}>
-              {busy ? 'Connecting...' : 'Continue with Google'}
-            </AppButton>
-          )}
-
-          {user ? (
-            <AppButton
-              fullWidth
-              tone='tertiary'
-              className='border-border'
-              isDisabled={busy}
-              onPress={() => void handleSignOut()}>
-              {busy ? 'Signing out...' : 'Sign out'}
-            </AppButton>
-          ) : null}
+          <AppButton
+            fullWidth
+            tone='primary'
+            className='border-border'
+            isDisabled={!ready || busy || isExpoGoNative || needsNativeRebuild || (Platform.OS === 'web' && !request)}
+            leadingIcon={<GoogleMark />}
+            onPress={() => void handleContinueWithGoogle()}>
+            {busy ? 'Connecting...' : 'Continue with Google'}
+          </AppButton>
 
           <ThemedText themeColor='textSecondary' className='text-[14px] text-balance text-center leading-5 opacity-50'>
             {isExpoGoNative
-              ? 'Google sign-in on Android and iOS requires a development build. Expo Go redirects to exp:// URLs, which Google rejects.'
+              ? '' //'Google sign-in on Android and iOS requires a development build. Expo Go redirects to exp:// URLs, which Google rejects.'
               : needsNativeRebuild
                 ? 'This build does not include the Google Sign-In native module yet. Rebuild and reinstall the Android app after adding the plugin.'
                 : usesNativeGoogleSignIn
-                  ? 'Google sign-in is using the native Android or iOS SDK for this build.'
+                  ? '' //'Google sign-in is using the native Android or iOS SDK for this build.'
                   : !ready
                     ? 'Restoring your session...'
                     : busy
                       ? 'Waiting for Google to finish the sign-in flow.'
-                      : user
-                        ? 'Firebase Authentication is active on this device.'
-                        : request
-                          ? 'Google sign-in is ready.'
-                          : 'Preparing Google sign-in.'}
+                      : request
+                        ? 'Google sign-in is ready.'
+                        : 'Preparing Google sign-in.'}
           </ThemedText>
 
           {errorMessage ? <ThemedText className='text-[14px] leading-5 text-danger'>{errorMessage}</ThemedText> : null}
