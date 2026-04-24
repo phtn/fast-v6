@@ -3,22 +3,22 @@ import { TabList, Tabs, TabSlot, TabTrigger, type TabListProps, type TabTriggerS
 import { useEffect } from 'react'
 import { Pressable, View } from 'react-native'
 
-import { ClubIcon, type ClubIconName } from '@/components/club/club-ui'
 import { ThemedText } from '@/components/themed-text'
 import { useAuthSession } from '@/context/auth-context'
 import { cn } from '@/lib/cn'
+import { IconName, RIcon } from './ui/icons'
 
 const ACTIVE_ICON_COLOR = '#0091ff'
 const INACTIVE_ICON_COLOR = '#74747B'
 
 const TABS_CONFIG = [
   { href: '/', icon: 'home', label: 'Home', name: 'home' },
-  { href: '/check-in', icon: 'check', label: 'Check in', name: 'check-in' },
-  { href: '/amenities', icon: 'amenity', label: 'Amenities', name: 'amenities' },
-  { href: '/concierge', icon: 'concierge', label: 'Concierge', name: 'concierge' }
+  { href: '/chat', icon: 'chat', label: 'Chat', name: 'chat' },
+  { href: '/amenities', icon: 'home', label: 'Amenities', name: 'amenities' },
+  { href: '/concierge', icon: 'grid', label: 'Concierge', name: 'concierge' }
 ] as const satisfies readonly {
-  href: '/' | '/check-in' | '/amenities' | '/concierge'
-  icon: ClubIconName
+  href: '/' | '/chat' | '/amenities' | '/concierge'
+  icon: IconName
   label: string
   name: string
 }[]
@@ -67,7 +67,7 @@ export function TabButton({
   return (
     <Pressable {...props} className='active:opacity-75'>
       <View className={cn('flex-row items-center gap-2 rounded-lg px-3 py-2', isFocused && 'bg-default')}>
-        <ClubIcon color={iconColor} focused={Boolean(isFocused)} name={icon} size={17} strokeWidth={1.4} />
+        <RIcon color={iconColor} focused={Boolean(isFocused)} name={icon} size={17} strokeWidth={1.4} />
         <ThemedText type='smallBold' themeColor={isFocused ? 'text' : 'textSecondary'}>
           {children}
         </ThemedText>

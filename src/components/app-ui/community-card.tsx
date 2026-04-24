@@ -67,11 +67,11 @@ export function CommunityCard({
             ) : null}
           </View>
 
-          <View className={cn('max-w-[176px] gap-1.5 pb-0.5')}>
+          <View className={cn('max-w-44 gap-1.5 pb-0.5')}>
             {badge ? <AppBadge tone='neutral'>{badge}</AppBadge> : null}
 
             <View className='flex-row items-baseline gap-1'>
-              <ThemedText className='text-[25px] leading-[30px] font-semibold'>{metricValue}</ThemedText>
+              <ThemedText className='text-[25px] leading-7.5 font-semibold'>{metricValue}</ThemedText>
               <ThemedText themeColor='textSecondary' className='text-[18px] leading-6 font-normal'>
                 {metricLabel}
               </ThemedText>

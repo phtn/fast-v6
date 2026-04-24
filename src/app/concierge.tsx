@@ -9,8 +9,9 @@ import {
   AppScreen,
   SectionHeading
 } from '@/components/app-ui'
-import { ClubIcon, EventRow } from '@/components/club/club-ui'
+import { EventRow } from '@/components/club/club-ui'
 import { ThemedText } from '@/components/themed-text'
+import { IconName, RIcon } from '@/components/ui/icons'
 import { clubEvents, conciergeRequests } from '@/lib/club-data'
 import { cn } from '@/lib/cn'
 
@@ -25,7 +26,7 @@ export default function ConciergeScreen() {
         title='Member services'
         description='Coordinate reservations, arrivals, transport, and private room needs with the house team.'
         trailing={
-          <AppButton size='sm' tone='active' leadingIcon={<ClubIcon color='#FFFFFF' name='concierge' size={17} />}>
+          <AppButton size='sm' tone='active' leadingIcon={<RIcon color='#FFFFFF' name='chat' size={17} />}>
             New request
           </AppButton>
         }
@@ -49,14 +50,14 @@ export default function ConciergeScreen() {
           <AppCard className='bg-secondary'>
             <AppCardHeader
               eyebrow='Priority'
-              title='Tonight&apos;s handoff'
+              title="Tonight's handoff"
               description='Dining, reception, and transport are linked to your arrival window.'
               trailing={<AppBadge tone='accent'>7:30 PM</AppBadge>}
             />
             <AppCardContent className='gap-3'>
-              <HandoffRow icon='access' label='Reception' value='Guest pass ready' />
-              <HandoffRow icon='amenity' label='Dining' value='Window table held' />
-              <HandoffRow icon='key' label='Transport' value='Pickup pending' />
+              <HandoffRow icon='home' label='Reception' value='Guest pass ready' />
+              <HandoffRow icon='home' label='Dining' value='Window table held' />
+              <HandoffRow icon='home' label='Transport' value='Pickup pending' />
             </AppCardContent>
           </AppCard>
         </View>
@@ -74,9 +75,9 @@ export default function ConciergeScreen() {
           <AppCard>
             <AppCardHeader eyebrow='House line' title='Direct support' />
             <AppCardContent className='gap-3'>
-              <SupportAction icon='concierge' label='Message concierge' />
-              <SupportAction icon='ticket' label='Add a guest' />
-              <SupportAction icon='calendar' label='Book a private room' />
+              <SupportAction icon='home' label='Message concierge' />
+              <SupportAction icon='home' label='Add a guest' />
+              <SupportAction icon='chat' label='Book a private room' />
             </AppCardContent>
           </AppCard>
         </View>
@@ -114,11 +115,11 @@ function RequestRow({
   )
 }
 
-function HandoffRow({ icon, label, value }: { icon: 'access' | 'amenity' | 'key'; label: string; value: string }) {
+function HandoffRow({ icon, label, value }: { icon: IconName; label: string; value: string }) {
   return (
     <View className='flex-row items-center gap-3 rounded-lg border border-border bg-background px-4 py-3'>
       <View className='h-9 w-9 items-center justify-center rounded-lg bg-default'>
-        <ClubIcon color='#8A8A91' name={icon} size={18} />
+        <RIcon color='#8A8A91' name={icon} size={18} />
       </View>
       <View className='flex-1'>
         <ThemedText className='font-medium'>{label}</ThemedText>
@@ -130,14 +131,14 @@ function HandoffRow({ icon, label, value }: { icon: 'access' | 'amenity' | 'key'
   )
 }
 
-function SupportAction({ icon, label }: { icon: 'calendar' | 'concierge' | 'ticket'; label: string }) {
+function SupportAction({ icon, label }: { icon: IconName; label: string }) {
   return (
     <View className='flex-row items-center gap-3 rounded-lg border border-border bg-background px-4 py-3'>
       <View className='h-9 w-9 items-center justify-center rounded-lg bg-active/15'>
-        <ClubIcon color='#0091ff' name={icon} size={18} />
+        <RIcon color='#0091ff' name={icon} size={18} />
       </View>
       <ThemedText className='flex-1 font-medium'>{label}</ThemedText>
-      <ClubIcon color='#8A8A91' name='chevron' size={17} />
+      <RIcon color='#8A8A91' name='grid' size={17} />
     </View>
   )
 }

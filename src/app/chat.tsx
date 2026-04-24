@@ -10,8 +10,9 @@ import {
   AppScreen,
   SectionHeading
 } from '@/components/app-ui'
-import { AccessPattern, ClubIcon, DetailCard, MemberPass, StepRow } from '@/components/club/club-ui'
+import { AccessPattern, DetailCard, MemberPass, StepRow } from '@/components/club/club-ui'
 import { ThemedText } from '@/components/themed-text'
+import { RIcon } from '@/components/ui/icons'
 import { useAuthSession } from '@/context/auth-context'
 import { arrivalSteps } from '@/lib/club-data'
 import { cn } from '@/lib/cn'
@@ -32,7 +33,7 @@ export default function CheckInScreen() {
       <SectionHeading
         eyebrow='Check-in'
         title='Your member access'
-        description='Use your pass at reception, confirm today&apos;s arrival, and manage guests before you enter.'
+        description="Use your pass at reception, confirm today's arrival, and manage guests before you enter."
       />
 
       <View className={cn('gap-4', isWide && 'flex-row items-start')}>
@@ -53,7 +54,7 @@ export default function CheckInScreen() {
             <AppCardContent className='gap-4'>
               <View className='flex-row gap-3 rounded-lg border border-border bg-background px-4 py-4'>
                 <View className='h-10 w-10 items-center justify-center rounded-lg bg-success/15'>
-                  <ClubIcon color='#38d48b' name='key' />
+                  <RIcon color='#38d48b' name='chat' />
                 </View>
                 <View className='flex-1 gap-1'>
                   <ThemedText className='font-medium'>Main entrance</ThemedText>
@@ -66,7 +67,7 @@ export default function CheckInScreen() {
               <AppButton
                 fullWidth
                 tone={checkedIn ? 'secondary' : 'active'}
-                leadingIcon={<ClubIcon color={checkedIn ? '#8A8A91' : '#FFFFFF'} name='check' size={18} />}
+                leadingIcon={<RIcon color={checkedIn ? '#8A8A91' : '#FFFFFF'} name='grid' size={18} />}
                 onPress={() => setCheckedIn((current) => !current)}>
                 {checkedIn ? 'Undo check-in' : 'Check in now'}
               </AppButton>

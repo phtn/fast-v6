@@ -5,7 +5,7 @@ import { View } from 'react-native'
 import { ThemedText } from '@/components/themed-text'
 import { cn } from '@/lib/cn'
 
-type Tone = 'primary' | 'secondary' | 'ghost' | 'active' | 'tertiary'
+type Tone = 'primary' | 'secondary' | 'tertiary' | 'quarternary' | 'ghost' | 'active'
 type AppButtonSize = 'sm' | 'md' | 'lg'
 
 type AppButtonProps = PropsWithChildren<
@@ -44,7 +44,8 @@ export function AppButton({
         size === 'lg' && 'min-h-14 px-12 rounded-[11px]',
         tone === 'primary' && 'border-foreground bg-foreground',
         tone === 'secondary' && 'border-secondary bg-secondary',
-        tone === 'tertiary' && 'border-secondary/10 bg-secondary/20',
+        tone === 'tertiary' && 'border-foreground/10 bg-foreground/20',
+        tone === 'quarternary' && 'border-foreground/2 bg-foreground/5',
         tone === 'ghost' && 'border-transparent bg-transparent',
         tone === 'active' && 'bg-active border-active text-white',
         fullWidth && 'self-stretch',

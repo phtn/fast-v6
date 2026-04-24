@@ -1,3 +1,5 @@
+import { IconName } from '@/components/ui/icons'
+
 export type ClubAccent = 'blue' | 'green' | 'amber' | 'rose' | 'slate'
 
 export type ClubMetric = {
@@ -10,8 +12,8 @@ export type ClubMetric = {
 export type ClubAction = {
   accent: ClubAccent
   description: string
-  href: '/check-in' | '/amenities' | '/concierge'
-  icon: 'access' | 'amenity' | 'concierge'
+  href: '/chat' | '/amenities' | '/concierge'
+  icon: IconName
   label: string
 }
 
@@ -79,22 +81,22 @@ export const clubActions: ClubAction[] = [
   {
     accent: 'green',
     description: 'Open your member pass and arrival status.',
-    href: '/check-in',
-    icon: 'access',
+    href: '/chat',
+    icon: 'chat',
     label: 'Check in'
   },
   {
     accent: 'blue',
     description: 'See availability across the house.',
     href: '/amenities',
-    icon: 'amenity',
+    icon: 'home',
     label: 'Amenities'
   },
   {
     accent: 'amber',
     description: 'Arrange tables, transport, and guest needs.',
     href: '/concierge',
-    icon: 'concierge',
+    icon: 'grid',
     label: 'Concierge'
   }
 ]
@@ -143,8 +145,8 @@ export const stars: Star[] = [
     category: 'bubly',
     description: 'Seasonal dining room with a private counter and late seating.',
     level: '3',
-    rate: '6 PM - 12 AM',
-    name: 'House Dining',
+    rate: '6K',
+    name: 'Vega',
     status: '12 seats open',
     likes: 0,
     tone: 'amber'
@@ -153,31 +155,31 @@ export const stars: Star[] = [
     category: 'sensational',
     description: 'Thermal circuit, treatment rooms, and recovery lounge.',
     level: '1',
-    rate: '7 AM - 10 PM',
-    name: 'Bathhouse',
+    rate: '10K',
+    name: 'Era',
     status: 'Quiet',
     likes: 0,
-    tone: 'amber'
+    tone: 'green'
   },
   {
     category: 'active',
     description: 'Sound-treated rooms, call booths, and staffed reception.',
     level: '2',
-    rate: '8 AM - 8 PM',
-    name: 'Work Suites',
+    rate: '8K',
+    name: 'Maia',
     status: '3 rooms open',
     likes: 0,
-    tone: 'amber'
+    tone: 'blue'
   },
   {
     category: 'fun',
     description: 'Screening room, records, games, and a reserved bar.',
     level: '4',
-    rate: '4 PM - 1 AM',
-    name: 'Members Lounge',
+    rate: '4K',
+    name: 'Mira',
     status: 'Members only',
     likes: 0,
-    tone: 'amber'
+    tone: 'green'
   }
 ]
 

@@ -10,8 +10,9 @@ import {
   AppScreen,
   SectionHeading
 } from '@/components/app-ui'
-import { AmenityCard, ClubIcon, QuickReserveButton } from '@/components/club/club-ui'
+import { AmenityCard, QuickReserveButton } from '@/components/club/club-ui'
 import { ThemedText } from '@/components/themed-text'
+import { RIcon } from '@/components/ui/icons'
 import { amenities, amenityCategories, type AmenityCategory } from '@/lib/club-data'
 import { cn } from '@/lib/cn'
 
@@ -74,7 +75,7 @@ export default function AmenitiesScreen() {
               <View className='gap-3 rounded-lg border border-border bg-background px-4 py-4'>
                 <View className='flex-row items-center gap-3'>
                   <View className='h-10 w-10 items-center justify-center rounded-lg bg-active/15'>
-                    <ClubIcon color='#0091ff' name='calendar' />
+                    <RIcon color='#0091ff' name='home' />
                   </View>
                   <View className='flex-1'>
                     <ThemedText className='font-medium'>9:30 PM - 11:00 PM</ThemedText>
@@ -90,7 +91,7 @@ export default function AmenitiesScreen() {
           </AppCard>
 
           <AppCard>
-            <AppCardHeader eyebrow='House notes' title='Tonight&apos;s service' />
+            <AppCardHeader eyebrow='House notes' title="Tonight's service" />
             <AppCardContent className='gap-3'>
               <ServiceNote title='Dining' detail='Late menu starts at 10 PM.' />
               <ServiceNote title='Wellness' detail='Bathhouse capacity resets every hour.' />
@@ -108,7 +109,7 @@ function ServiceNote({ detail, title }: { detail: string; title: string }) {
     <View className='rounded-lg border border-border bg-background px-4 py-3'>
       <View className='flex-row items-center justify-between gap-3'>
         <ThemedText className='font-medium'>{title}</ThemedText>
-        <ClubIcon color='#8A8A91' name='chevron' size={17} />
+        <RIcon color='#8A8A91' name='grid' size={17} />
       </View>
       <ThemedText type='small' themeColor='textSecondary' className='mt-1'>
         {detail}

@@ -1,16 +1,4 @@
-import { Platform } from 'react-native'
-
 const env = (name: string) => process.env[name] ?? ''
-
-const androidApp = {
-  apiKey: env('EXPO_PUBLIC_FIREBASE_ANDROID_API_KEY'),
-  appId: env('EXPO_PUBLIC_FIREBASE_ANDROID_APP_ID')
-} as const
-
-const iosApp = {
-  apiKey: env('EXPO_PUBLIC_FIREBASE_IOS_API_KEY'),
-  appId: env('EXPO_PUBLIC_FIREBASE_IOS_APP_ID')
-} as const
 
 const firebaseWebConfig = {
   apiKey: env('EXPO_PUBLIC_FIREBASE_WEB_API_KEY'),
@@ -27,30 +15,10 @@ const storageBucket = env('EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET')
 const messagingSenderId = env('EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID')
 const authDomain = env('EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN')
 
-export const firebaseConfig = Platform.select({
-  ios: {
-    ...iosApp,
-    authDomain,
-    messagingSenderId,
-    projectId,
-    storageBucket
-  },
-  android: {
-    ...androidApp,
-    authDomain,
-    messagingSenderId,
-    projectId,
-    storageBucket
-  },
-  web: firebaseWebConfig,
-  default: {
-    ...firebaseWebConfig,
-    authDomain,
-    messagingSenderId,
-    projectId,
-    storageBucket
-  }
-})!
+// This app uses the Firebase JavaScript SDK in React Native, so native builds
+// should initialize with the Firebase Web app config instead of the Android/iOS
+// native app config files.
+export const firebaseConfig = firebaseWebConfig
 
 export const googleAuthConfig = {
   androidClientId: env('EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID'),

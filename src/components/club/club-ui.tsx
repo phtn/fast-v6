@@ -2,12 +2,12 @@ import { Image } from 'expo-image'
 import { type Href, useRouter } from 'expo-router'
 import type { PropsWithChildren, ReactNode } from 'react'
 import { Pressable, View } from 'react-native'
-import Svg, { Circle, Path, Rect } from 'react-native-svg'
 
 import { AppBadge, AppButton, AppCard, AppCardContent, AppCardHeader } from '@/components/app-ui'
 import { ThemedText } from '@/components/themed-text'
 import { type ClubAccent } from '@/lib/club-data'
 import { cn } from '@/lib/cn'
+import { IconName, RIcon } from '../ui/icons'
 
 export type ClubIconName =
   | 'access'
@@ -65,180 +65,6 @@ export function getClubAccentClass(accent: ClubAccent, part: keyof (typeof accen
 
 export function getClubAccentColor(accent: ClubAccent) {
   return accentColors[accent]
-}
-
-export function ClubIcon({
-  color = '#8A8A91',
-  focused = false,
-  name,
-  size = 22,
-  strokeWidth = focused ? 2 : 1.5
-}: {
-  color?: string
-  focused?: boolean
-  name: ClubIconName
-  size?: number
-  strokeWidth?: number
-}) {
-  switch (name) {
-    case 'home':
-      return (
-        <Svg fill='none' height={size} viewBox='0 0 24 24' width={size}>
-          <Path
-            d='M4.75 10.5 12 4.75l7.25 5.75V19a1 1 0 0 1-1 1h-4.5v-5.25h-3.5V20h-4.5a1 1 0 0 1-1-1v-8.5Z'
-            fill={focused ? color : undefined}
-            stroke={color}
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth={strokeWidth}
-          />
-        </Svg>
-      )
-    case 'access':
-      return (
-        <Svg fill='none' height={size} viewBox='0 0 24 24' width={size}>
-          <Rect
-            fill={focused ? color : undefined}
-            height='13.5'
-            rx='2.5'
-            stroke={color}
-            strokeWidth={strokeWidth}
-            width='17.5'
-            x='3.25'
-            y='5.25'
-          />
-          <Path
-            d='M7 10h10M7 14h6'
-            stroke={focused ? '#050505' : color}
-            strokeLinecap='round'
-            strokeWidth={strokeWidth}
-          />
-        </Svg>
-      )
-    case 'amenity':
-      return (
-        <Svg fill='none' height={size} viewBox='0 0 24 24' width={size}>
-          <Path
-            d='M4.75 15.5h14.5M6.25 15.5c.2-4.65 2.1-7.25 5.75-7.25s5.55 2.6 5.75 7.25M12 5.25v3'
-            stroke={color}
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth={strokeWidth}
-          />
-          <Path d='M7.5 18.75h9' stroke={color} strokeLinecap='round' strokeWidth={strokeWidth} />
-        </Svg>
-      )
-    case 'calendar':
-      return (
-        <Svg fill='none' height={size} viewBox='0 0 24 24' width={size}>
-          <Rect height='15.5' rx='2.5' stroke={color} strokeWidth={strokeWidth} width='16.5' x='3.75' y='5.25' />
-          <Path
-            d='M7.5 3.75v3M16.5 3.75v3M4.5 9.75h15'
-            stroke={color}
-            strokeLinecap='round'
-            strokeWidth={strokeWidth}
-          />
-        </Svg>
-      )
-    case 'check':
-      return (
-        <Svg fill='none' height={size} viewBox='0 0 24 24' width={size}>
-          <Circle
-            cx='12'
-            cy='12'
-            fill={focused ? color : undefined}
-            r='7.75'
-            stroke={color}
-            strokeWidth={strokeWidth}
-          />
-          <Path
-            d='m8.5 12.2 2.2 2.2 4.9-5'
-            stroke={focused ? '#050505' : color}
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth={strokeWidth}
-          />
-        </Svg>
-      )
-    case 'chevron':
-      return (
-        <Svg fill='none' height={size} viewBox='0 0 24 24' width={size}>
-          <Path
-            d='m9.5 6.5 5.25 5.5-5.25 5.5'
-            stroke={color}
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth={strokeWidth}
-          />
-        </Svg>
-      )
-    case 'concierge':
-      return (
-        <Svg fill='none' height={size} viewBox='0 0 24 24' width={size}>
-          <Path
-            d='M5 17.75h14M7.25 17.75c.2-4.35 1.95-6.8 4.75-6.8s4.55 2.45 4.75 6.8M12 7.5v3.25'
-            stroke={color}
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth={strokeWidth}
-          />
-          <Circle cx='12' cy='6' r='1.5' stroke={color} strokeWidth={strokeWidth} />
-        </Svg>
-      )
-    case 'key':
-      return (
-        <Svg fill='none' height={size} viewBox='0 0 24 24' width={size}>
-          <Circle cx='8' cy='12' r='3.25' stroke={color} strokeWidth={strokeWidth} />
-          <Path d='M11.25 12h8M16 12v3M18.5 12v2' stroke={color} strokeLinecap='round' strokeWidth={strokeWidth} />
-        </Svg>
-      )
-    case 'lounge':
-      return (
-        <Svg fill='none' height={size} viewBox='0 0 24 24' width={size}>
-          <Path
-            d='M5.25 13.75v-3A2.5 2.5 0 0 1 7.75 8.25h8.5a2.5 2.5 0 0 1 2.5 2.5v3M4.5 13.75h15v4.5h-15zM7 18.25v1.5M17 18.25v1.5'
-            stroke={color}
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth={strokeWidth}
-          />
-        </Svg>
-      )
-    case 'spark':
-      return (
-        <Svg fill='none' height={size} viewBox='0 0 24 24' width={size}>
-          <Path
-            d='M12 3.75 13.7 9l5.55 1.25-5.55 1.25L12 16.75l-1.7-5.25-5.55-1.25L10.3 9 12 3.75ZM18 15.25l.75 2.25 2.25.5-2.25.5L18 20.75l-.75-2.25-2.25-.5 2.25-.5.75-2.25Z'
-            fill={focused ? color : undefined}
-            stroke={color}
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth={strokeWidth}
-          />
-        </Svg>
-      )
-    case 'ticket':
-      return (
-        <Svg fill='none' height={size} viewBox='0 0 24 24' width={size}>
-          <Path
-            d='M5.75 7.25h12.5a1.5 1.5 0 0 1 1.5 1.5v2.1a2.15 2.15 0 0 0 0 4.3v2.1a1.5 1.5 0 0 1-1.5 1.5H5.75a1.5 1.5 0 0 1-1.5-1.5v-2.1a2.15 2.15 0 0 0 0-4.3v-2.1a1.5 1.5 0 0 1 1.5-1.5Z'
-            stroke={color}
-            strokeLinejoin='round'
-            strokeWidth={strokeWidth}
-          />
-          <Path d='M9 9.5v5M15 9.5v5' stroke={color} strokeLinecap='round' strokeWidth={strokeWidth} />
-        </Svg>
-      )
-    case 'grid':
-      return (
-        <Svg fill='none' height={size} viewBox='0 0 24 24' width={size}>
-          <Rect height='6.5' rx='1.4' stroke={color} strokeWidth={strokeWidth} width='6.5' x='4.25' y='4.25' />
-          <Rect height='6.5' rx='1.4' stroke={color} strokeWidth={strokeWidth} width='6.5' x='13.25' y='4.25' />
-          <Rect height='6.5' rx='1.4' stroke={color} strokeWidth={strokeWidth} width='6.5' x='4.25' y='13.25' />
-          <Rect height='6.5' rx='1.4' stroke={color} strokeWidth={strokeWidth} width='6.5' x='13.25' y='13.25' />
-        </Svg>
-      )
-  }
 }
 
 export function ClubHeroVisual({ className }: { className?: string }) {
@@ -300,7 +126,7 @@ export function ActionCard({
   accent: ClubAccent
   description: string
   href: Href
-  icon: ClubIconName
+  icon: IconName
   label: string
 }) {
   const router = useRouter()
@@ -318,12 +144,12 @@ export function ActionCard({
               // getClubAccentClass(accent, 'bg')
               // getClubAccentClass(accent, 'border')
             )}>
-            <ClubIcon color={getClubAccentColor(accent)} name={icon} />
+            <RIcon color={getClubAccentColor(accent)} name={icon} />
           </View>
           <View className='gap-1'>
             <View className='flex-row items-center gap-2'>
               <ThemedText className='flex-1 text-[17px] leading-6 font-medium'>{label}</ThemedText>
-              <ClubIcon color='#8A8A91' name='chevron' size={18} />
+              <RIcon color='#8A8A91' name='home' size={18} />
             </View>
             <ThemedText themeColor='textSecondary' className='leading-5'>
               {description}
@@ -389,7 +215,7 @@ export function EventRow({
           getClubAccentClass(accent, 'bg'),
           getClubAccentClass(accent, 'border')
         )}>
-        <ClubIcon color={getClubAccentColor(accent)} name='calendar' />
+        <RIcon color={getClubAccentColor(accent)} name='grid' />
       </View>
       <View className='flex-1 gap-1'>
         <ThemedText className='font-medium'>{title}</ThemedText>
@@ -408,20 +234,20 @@ export function MemberPass({ memberName, status = 'Access clear' }: { memberName
   return (
     <View className='overflow-hidden rounded-lg bg-foreground'>
       <View className='relative min-h-fit p-3'>
-        <View className='absolute -right-24 -top-16 h-44 w-44 rounded-full bg-active/5' />
-        <View className='absolute -bottom-28 -left-28 h-64 w-64 rounded-full bg-success/20' />
+        <View className='absolute -right-24 -top-16 h-44 w-44 rounded-full bg-pink-400/5' />
+        <View className='absolute -bottom-28 -left-28 h-64 w-64 rounded-full bg-indigo-400/20' />
         <View className='relative gap-7'>
           <View className='flex-row items-start justify-between gap-4'>
             <View className='gap-0'>
               <ThemedText
                 style={{ letterSpacing: 1.5 }}
-                className='text-[10px] leading-4 font-normal uppercase text-background/80 tracking-wider'>
+                className='text-[10px] leading-4 font-normal uppercase text-background/80 tracking-wider px-1'>
                 Founder Series
               </ThemedText>
-              <ThemedText className='font-semibold text-background text-lg'>{memberName}</ThemedText>
+              <ThemedText className='font-semibold text-background text-xl'>{memberName}</ThemedText>
             </View>
             <View className='h-10 w-10 items-center justify-center'>
-              <ClubIcon color='#007AFF' name='chevron' />
+              <RIcon color='#5856D6' name='grid' />
             </View>
           </View>
         </View>
@@ -466,7 +292,7 @@ export function StepRow({ children, complete = true }: PropsWithChildren<{ compl
     <View className='flex-row items-center gap-3'>
       <View
         className={cn('h-6 w-6 items-center justify-center rounded-full', complete ? 'bg-success/20' : 'bg-default')}>
-        <ClubIcon color={complete ? '#38d48b' : '#8A8A91'} name='check' size={15} strokeWidth={2} />
+        <RIcon color={complete ? '#38d48b' : '#8A8A91'} name='home' size={15} strokeWidth={2} />
       </View>
       <ThemedText className='flex-1'>{children}</ThemedText>
     </View>
@@ -490,7 +316,7 @@ export function DetailCard({
         trailing={
           trailing ?? (
             <View className='h-10 w-10 items-center justify-center rounded-lg bg-default'>
-              <ClubIcon color='#8A8A91' name={icon} />
+              <RIcon color='#8A8A91' name={'home'} />
             </View>
           )
         }

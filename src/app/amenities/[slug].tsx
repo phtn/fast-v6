@@ -1,5 +1,5 @@
-import { useMemo } from 'react'
 import { useLocalSearchParams, useRouter } from 'expo-router'
+import { useMemo } from 'react'
 import { View } from 'react-native'
 
 import {
@@ -11,9 +11,8 @@ import {
   AppScreen,
   SectionHeading
 } from '@/components/app-ui'
-import { ClubIcon } from '@/components/club/club-ui'
-import { HyperCard } from '@/components/club/hyper-card'
 import { ThemedText } from '@/components/themed-text'
+import { RIcon } from '@/components/ui/icons'
 import { getAmenityBySlug } from '@/lib/club-data'
 
 function formatCategoryLabel(value: string) {
@@ -23,7 +22,7 @@ function formatCategoryLabel(value: string) {
 export default function AmenityProfileScreen() {
   const router = useRouter()
   const params = useLocalSearchParams<{ slug?: string | string[] }>()
-  const slug = typeof params.slug === 'string' ? params.slug : params.slug?.[0] ?? ''
+  const slug = typeof params.slug === 'string' ? params.slug : (params.slug?.[0] ?? '')
   const amenity = useMemo(() => getAmenityBySlug(slug), [slug])
 
   if (!amenity) {
@@ -32,7 +31,7 @@ export default function AmenityProfileScreen() {
         <AppButton
           leadingIcon={
             <View style={{ transform: [{ rotate: '180deg' }] }}>
-              <ClubIcon color='#8A8A91' name='chevron' size={16} />
+              <RIcon color='#8A8A91' name='grid' size={16} />
             </View>
           }
           onPress={() => router.back()}
@@ -55,7 +54,7 @@ export default function AmenityProfileScreen() {
       <AppButton
         leadingIcon={
           <View style={{ transform: [{ rotate: '180deg' }] }}>
-            <ClubIcon color='#8A8A91' name='chevron' size={16} />
+            <RIcon color='#8A8A91' name='grid' size={16} />
           </View>
         }
         onPress={() => router.back()}
@@ -64,7 +63,7 @@ export default function AmenityProfileScreen() {
         Back
       </AppButton>
 
-      <HyperCard {...amenity} disableNavigation />
+      {/*<HyperCard {...amenity} disableNavigation />*/}
 
       <SectionHeading
         eyebrow='Amenity profile'

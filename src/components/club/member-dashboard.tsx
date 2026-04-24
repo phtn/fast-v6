@@ -13,10 +13,11 @@ import {
   Carousel,
   SectionHeading
 } from '@/components/app-ui'
-import { ActionCard, ClubHeroVisual, ClubIcon, EventRow, MemberPass } from '@/components/club/club-ui'
+import { ActionCard, ClubHeroVisual, EventRow, MemberPass } from '@/components/club/club-ui'
 import { ThemedText } from '@/components/themed-text'
 import { clubActions, clubEvents, stars } from '@/lib/club-data'
 import { cn } from '@/lib/cn'
+import { RIcon } from '../ui/icons'
 import { HyperCard } from './hyper-card'
 import { Topbar } from './topbar'
 
@@ -39,8 +40,8 @@ export function MemberDashboard({ errorMessage, onSignOut, signingOut, user }: M
 
   return (
     <AppScreen
-      innerClassName='gap-2'
       maxWidth={980}
+      innerClassName='gap-2'
       stickyHeader={<Topbar photoUrl={user.photoURL} text={memberName} />}>
       <View className={cn('gap-4', isWide && 'flex-row items-stretch')}>
         <View className='flex-1 gap-4'>
@@ -63,9 +64,10 @@ export function MemberDashboard({ errorMessage, onSignOut, signingOut, user }: M
           )}
         </View>
 
-        <SectionHeading title='Join today!' titleClassName='text-lg' />
-        <MemberPass memberName={'Get Full Access'} />
-
+        <View className='px-1 gap-2'>
+          <SectionHeading title='Join today!' titleClassName='text-lg' />
+          <MemberPass memberName={'Get Full Access'} />
+        </View>
         <AppCard className='hidden' style={isWide ? { flex: 1.2 } : undefined}>
           <AppCardContent className='gap-5 pt-5'>
             <ClubHeroVisual />
@@ -81,14 +83,14 @@ export function MemberDashboard({ errorMessage, onSignOut, signingOut, user }: M
                 <AppButton
                   size='sm'
                   tone='active'
-                  leadingIcon={<ClubIcon color='#FFFFFF' name='check' size={17} />}
-                  onPress={() => router.push('/check-in')}>
+                  leadingIcon={<RIcon color='#FFFFFF' name='grid' size={17} />}
+                  onPress={() => router.push('/chat')}>
                   Open pass
                 </AppButton>
                 <AppButton
                   size='sm'
                   tone='secondary'
-                  leadingIcon={<ClubIcon color='#8A8A91' name='concierge' size={17} />}
+                  leadingIcon={<RIcon color='#8A8A91' name='grid' size={17} />}
                   onPress={() => router.push('/concierge')}>
                   Request help
                 </AppButton>
