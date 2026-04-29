@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Fast",
-    "slug": "fast-technologies",
+    "slug": "fastinsure-technologies",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -75,7 +75,7 @@
         {
           "backgroundColor": "#208AEF",
           "android": {
-            "image": "./assets/images/fastcar-optimized.svg",
+            "image": "./assets/images/expo-logo.png",
             "imageWidth": 76
           }
         }
