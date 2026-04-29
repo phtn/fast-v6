@@ -202,7 +202,7 @@ export default function ChatScreen() {
                 ))}
               </View>
 
-              <View className='rounded-[24px] border border-border bg-background px-4 py-4'>
+              <View className='rounded-3xl border border-border bg-background px-4 py-4'>
                 <View className='flex-row items-end gap-3'>
                   <View className='h-11 w-11 items-center justify-center rounded-2xl bg-default'>
                     <MCIcon color='#0091ff' name='send-circle-outline' size={22} />
@@ -268,57 +268,57 @@ function ChatStickyHeader({ isWide }: { isWide: boolean }) {
   )
 }
 
-function HeroCard({ memberName }: { memberName: string }) {
-  return (
-    <AppCard className='border-transparent bg-foreground'>
-      <View className='absolute inset-0 bg-linear-to-br from-white/10 via-transparent to-active/20' />
-      <View className='absolute -right-10 -top-10 h-40 w-40 rounded-full bg-active/30' />
-      <View className='absolute -left-6 bottom-0 h-28 w-28 rounded-full bg-white/10' />
+// function HeroCard({ memberName }: { memberName: string }) {
+//   return (
+//     <AppCard className='border-transparent bg-foreground'>
+//       <View className='absolute inset-0 bg-linear-to-br from-white/10 via-transparent to-active/20' />
+//       <View className='absolute -right-10 -top-10 h-40 w-40 rounded-full bg-active/30' />
+//       <View className='absolute -left-6 bottom-0 h-28 w-28 rounded-full bg-white/10' />
 
-      <AppCardContent className='pt-5 gap-6'>
-        <View className='flex-row gap-4'>
-          <View className='flex-row gap-4 w-full'>
-            <View className='flex-1 gap-2 border border-t-mauve-800 w-full'>
-              <ThemedText type='eyebrow' themeColor='background' className='opacity-75'>
-                Private channel
-              </ThemedText>
-              <ThemedText themeColor='background' className='text-[30px] leading-8 font-medium'>
-                Line for {memberName}
-              </ThemedText>
-              <ThemedText themeColor='background' className='max-w-160 opacity-80'>
-                A quieter, faster thread for arrivals, dining notes, guest changes, and last-minute transport without
-                jumping between desks.
-              </ThemedText>
-            </View>
-          </View>
+//       <AppCardContent className='pt-5 gap-6'>
+//         <View className='flex-row gap-4'>
+//           <View className='flex-row gap-4 w-full'>
+//             <View className='flex-1 gap-2 border border-t-mauve-800 w-full'>
+//               <ThemedText type='eyebrow' themeColor='background' className='opacity-75'>
+//                 Private channel
+//               </ThemedText>
+//               <ThemedText themeColor='background' className='text-[30px] leading-8 font-medium'>
+//                 Line for {memberName}
+//               </ThemedText>
+//               <ThemedText themeColor='background' className='max-w-160 opacity-80'>
+//                 A quieter, faster thread for arrivals, dining notes, guest changes, and last-minute transport without
+//                 jumping between desks.
+//               </ThemedText>
+//             </View>
+//           </View>
 
-          <View className='rounded-full border border-white/10 bg-white/10 px-3 py-2'>
-            <ThemedText type='smallBold' themeColor='background'>
-              2 min reply
-            </ThemedText>
-          </View>
-        </View>
+//           <View className='rounded-full border border-white/10 bg-white/10 px-3 py-2'>
+//             <ThemedText type='smallBold' themeColor='background'>
+//               2 min reply
+//             </ThemedText>
+//           </View>
+//         </View>
 
-        <View className='flex-row flex-wrap gap-2'>
-          <HeroPill icon='clock-time-four-outline' label='Replies stay short and live.' />
-          <HeroPill icon='shield-check-outline' label='Reception already has your pass details.' />
-          <HeroPill icon='car-outline' label='Transport can join without opening a new request.' />
-        </View>
-      </AppCardContent>
-    </AppCard>
-  )
-}
+//         <View className='flex-row flex-wrap gap-2'>
+//           <HeroPill icon='clock-time-four-outline' label='Replies stay short and live.' />
+//           <HeroPill icon='shield-check-outline' label='Reception already has your pass details.' />
+//           <HeroPill icon='car-outline' label='Transport can join without opening a new request.' />
+//         </View>
+//       </AppCardContent>
+//     </AppCard>
+//   )
+// }
 
-function HeroPill({ icon, label }: { icon: MaterialIconName; label: string }) {
-  return (
-    <View className='flex-row items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2'>
-      <MCIcon color='#F7F4EF' name={icon} size={15} />
-      <ThemedText type='small' themeColor='background' className='opacity-85'>
-        {label}
-      </ThemedText>
-    </View>
-  )
-}
+// function HeroPill({ icon, label }: { icon: MaterialIconName; label: string }) {
+//   return (
+//     <View className='flex-row items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2'>
+//       <MCIcon color='#F7F4EF' name={icon} size={15} />
+//       <ThemedText type='small' themeColor='background' className='opacity-85'>
+//         {label}
+//       </ThemedText>
+//     </View>
+//   )
+// }
 
 function MessageRow({ message }: { message: ChatMessage }) {
   if (message.speaker === 'system') {
@@ -336,7 +336,7 @@ function MessageRow({ message }: { message: ChatMessage }) {
   if (message.speaker === 'member') {
     return (
       <View className='items-end gap-2'>
-        <View className='rounded-[24px] bg-active px-4 py-3.5' style={{ maxWidth: '88%' }}>
+        <View className='rounded-3xl bg-active px-4 py-3.5' style={{ maxWidth: '88%' }}>
           <ThemedText className='text-[15px] leading-5.5 text-active-foreground'>{message.body}</ThemedText>
         </View>
         <ThemedText type='small' themeColor='textSecondary' className='pr-2'>
@@ -360,8 +360,7 @@ function MessageRow({ message }: { message: ChatMessage }) {
           </ThemedText>
         </View>
       </View>
-
-      <View className='rounded-[24px] border border-border bg-background px-4 py-3.5' style={{ maxWidth: '88%' }}>
+      <View className='rounded-3xl border border-border bg-background px-4 py-3.5' style={{ maxWidth: '88%' }}>
         <ThemedText className='text-[15px] leading-5.5'>{message.body}</ThemedText>
       </View>
     </View>
@@ -383,7 +382,6 @@ function DeskRow({ desk }: { desk: DeskState }) {
               {desk.tone === 'active' ? 'Ready' : desk.tone === 'accent' ? 'Held' : 'On call'}
             </AppBadge>
           </View>
-
           <ThemedText type='small' themeColor='textSecondary'>
             {desk.detail}
           </ThemedText>
