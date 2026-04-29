@@ -291,7 +291,10 @@ export function StepRow({ children, complete = true }: PropsWithChildren<{ compl
   return (
     <View className='flex-row items-center gap-3'>
       <View
-        className={cn('h-6 w-6 items-center justify-center rounded-full', complete ? 'bg-success/20' : 'bg-default')}>
+        className={cn(
+          'h-6 w-6 items-center justify-center rounded-full',
+          complete ? 'bg-success-soft-hover' : 'bg-default'
+        )}>
         <RIcon color={complete ? '#38d48b' : '#8A8A91'} name='home' size={15} strokeWidth={2} />
       </View>
       <ThemedText className='flex-1'>{children}</ThemedText>

@@ -104,7 +104,7 @@ export function AnimatedIcon() {
 
       <Animated.View entering={keyframe.duration(DURATION)} style={styles.background} />
       <Animated.View style={styles.imageContainer} entering={logoKeyframe.duration(DURATION)}>
-        <Image style={styles.image} source={require('@/assets/images/expo-logo.png')} />
+        <Image style={styles.image} source={require('@/assets/images/fastcar-optimized.svg')} />
       </Animated.View>
     </View>
   )
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     position: 'absolute'
   },
   backgroundSolidColor: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     backgroundColor: '#208AEF',
     zIndex: 1000
   }

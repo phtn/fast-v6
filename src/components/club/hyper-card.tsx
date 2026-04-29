@@ -95,7 +95,7 @@ export function HyperCard({
           ? undefined
           : () => router.push({ params: { slug: amenitySlug }, pathname: '/amenities/[slug]' })
       }>
-      <AppCard className='relative min-h-120 border-secondary bg-foreground'>
+      <AppCard className='relative min-h-120 border-secondary bg-foreground rounded-2xl'>
         <Image
           className='absolute inset-0 h-full w-full'
           contentFit='cover'

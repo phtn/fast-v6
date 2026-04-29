@@ -9,7 +9,7 @@ export const List = () => {
   const mutedColor = useThemeColor('muted')
 
   return (
-    <View className='flex-1 justify-center px-5'>
+    <View className='flex-1 justify-center px-2'>
       <Text className='text-sm text-muted mb-2 ml-2'>Account</Text>
       <ListGroup className='mb-6'>
         <ListGroup.Item>

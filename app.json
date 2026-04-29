@@ -66,10 +66,7 @@
             ]
           },
           "ios": {
-            "fonts": [
-              "./assets/fonts/okxs-regular.ttf",
-              "./assets/fonts/okxs-medium.ttf"
-            ]
+            "fonts": ["./assets/fonts/okxs-regular.ttf", "./assets/fonts/okxs-medium.ttf"]
           }
         }
       ],
@@ -78,7 +75,7 @@
         {
           "backgroundColor": "#208AEF",
           "android": {
-            "image": "./assets/images/splash-icon.png",
+            "image": "./assets/images/fastcar-optimized.svg",
             "imageWidth": 76
           }
         }

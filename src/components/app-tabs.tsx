@@ -18,11 +18,14 @@ const INACTIVE_ICON_COLOR = '#74747B'
 const TABS_CONFIG = [
   { href: '/', icon: 'home', label: 'Home', name: 'home' },
   { href: '/chat', icon: 'chat', label: 'Chat', name: 'chat' },
-  { href: '/amenities', icon: 'home', label: 'Amenities', name: 'amenities' },
-  { href: '/concierge', icon: 'chat', label: 'Concierge', name: 'concierge' }
+  { href: '/amenities', icon: 'chest', label: 'Amenities', name: 'amenities' },
+  { href: '/concierge', icon: 'grid', label: 'Concierge', name: 'concierge' }
 ] as const
 
-const HIDDEN_TABS_CONFIG = [{ href: '/account', name: 'account' }] as const
+const HIDDEN_TABS_CONFIG = [
+  { href: '/account', name: 'account' },
+  { href: '/settings', name: 'settings' }
+] as const
 
 type TabIconName = (typeof TABS_CONFIG)[number]['icon']
 

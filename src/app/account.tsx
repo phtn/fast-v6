@@ -39,8 +39,8 @@ export default function AccountScreen() {
     <AppScreen innerClassName='gap-6' maxWidth={760}>
       <AppButton
         leadingIcon={
-          <View style={{ transform: [{ rotate: '180deg' }] }}>
-            <RIcon color='#8A8A91' name='home' size={16} />
+          <View>
+            <RIcon color='#8A8A91' name='left' size={16} fill='#8A8A91' />
           </View>
         }
         onPress={() => router.back()}
@@ -49,11 +49,7 @@ export default function AccountScreen() {
         Back
       </AppButton>
 
-      <SectionHeading
-        eyebrow='Account'
-        title='Profile and preferences'
-        description='Manage your member identity, theme preference, and session settings.'
-      />
+      <SectionHeading eyebrow='Account' title='Settings' />
 
       <AppCard>
         <AppCardContent className='gap-5 pt-5'>

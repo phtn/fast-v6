@@ -23,6 +23,11 @@ const TABS_CONFIG = [
   name: string
 }[]
 
+const HIDDEN_TABS_CONFIG = [
+  { href: '/account', name: 'account' },
+  { href: '/settings', name: 'settings' }
+] as const
+
 type WebTabIconName = (typeof TABS_CONFIG)[number]['icon']
 
 export default function AppTabs() {
@@ -46,6 +51,10 @@ export default function AppTabs() {
               <TabTrigger key={tab.name} asChild href={tab.href} name={tab.name}>
                 <TabButton icon={tab.icon}>{tab.label}</TabButton>
               </TabTrigger>
+            ))}
+
+            {HIDDEN_TABS_CONFIG.map((tab) => (
+              <TabTrigger key={tab.name} href={tab.href} name={tab.name} style={{ display: 'none' }} />
             ))}
           </CustomTabList>
         </TabList>
